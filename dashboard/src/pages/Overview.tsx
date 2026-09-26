@@ -156,7 +156,7 @@ export const Overview: React.FC<OverviewProps> = ({ onNavigate }) => {
               Transforming Civic Challenges Into Academic Patents & Industry Solutions
             </h3>
             <p style={{ fontSize: '13px', color: '#c4e0cb', lineHeight: 1.5, maxWidth: '540px' }}>
-              Samadhan Setu ingests hyper-local civic submissions across Jharkhand, leverages AI semantic deduplication and institutional capability matching, and mobilizes student-faculty innovation teams.
+              SANKALP ingests hyper-local civic submissions across Jharkhand, leverages AI semantic deduplication and institutional capability matching, and mobilizes student-faculty innovation teams.
             </p>
           </div>
 

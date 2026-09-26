@@ -1,16 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
+import { LoginPage } from './pages/LoginPage';
 import { Overview } from './pages/Overview';
 import { Heatmap } from './pages/Heatmap';
 import { Analytics } from './pages/Analytics';
 import { Leaderboard } from './pages/Leaderboard';
 import { ProblemsTable } from './pages/ProblemsTable';
 import { PublicSubmit } from './pages/PublicSubmit';
+import { getStoredUser, logoutUser, type UserProfile } from './api';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    const existing = getStoredUser();
+    if (existing) {
+      setCurrentUser(existing);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    logoutUser();
+    setCurrentUser(null);
+  };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
@@ -49,13 +64,18 @@ export function App() {
       case 'overview':
       default:
         return {
-          title: 'Samadhan Setu — Command Center',
+          title: 'SANKALP — Command Center',
           subtitle: 'Dept. of Higher & Technical Education, Government of Jharkhand',
         };
     }
   };
 
   const headerInfo = getHeaderInfo();
+
+  // If user is not authenticated, render LoginPage
+  if (!currentUser) {
+    return <LoginPage onLoginSuccess={setCurrentUser} />;
+  }
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-main)' }}>
@@ -69,6 +89,8 @@ export function App() {
           subtitle={headerInfo.subtitle}
           onRefresh={handleRefresh}
           isRefreshing={isRefreshing}
+          currentUser={currentUser}
+          onLogout={handleLogout}
         />
 
         <main style={{ flex: 1, overflowY: 'auto' }}>

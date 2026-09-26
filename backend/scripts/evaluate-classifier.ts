@@ -176,7 +176,7 @@ const TEST_CASES: EvaluationCase[] = [
 
 async function runEvaluation() {
   console.log('\n' + '='.repeat(85));
-  console.log('  🎯 SAMADHAN SETU — EMBEDDING-BASED PROBLEM CLASSIFIER EVALUATION');
+  console.log('  🎯 SANKALP — EMBEDDING-BASED PROBLEM CLASSIFIER EVALUATION');
   console.log('='.repeat(85));
   console.log('Initializing embedding engine and theme centroid representations...\n');
 

@@ -12,6 +12,7 @@ import '../../features/citizen/screens/my_submissions_screen.dart';
 import '../../features/student/screens/student_home_screen.dart';
 import '../../features/faculty/screens/faculty_home_screen.dart';
 import '../../features/industry/screens/industry_home_screen.dart';
+import '../../features/dashboard/screens/dashboard_shell.dart';
 import '../../features/auth/providers/auth_provider.dart';
 import '../storage/hive_boxes.dart';
 
@@ -45,10 +46,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(path: '/role-select', builder: (ctx, state) => const RoleSelectionScreen()),
 
-      // ─── Citizen routes ───────────────────────────────────
+      // ─── Citizen / Dashboard routes ────────────────────────
       GoRoute(
         path: '/citizen',
-        builder: (ctx, state) => const CitizenHomeScreen(),
+        builder: (ctx, state) => const DashboardShell(),
         routes: [
           GoRoute(path: 'submit', builder: (ctx, state) => const SubmitProblemScreen()),
           GoRoute(path: 'submissions', builder: (ctx, state) => const MySubmissionsScreen()),
@@ -61,6 +62,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
+
+      // ─── Dashboard shell (standalone) ─────────────────────
+      GoRoute(path: '/dashboard', builder: (ctx, state) => const DashboardShell()),
 
       // ─── Student routes ───────────────────────────────────
       GoRoute(path: '/student', builder: (ctx, state) => const StudentHomeScreen()),
@@ -84,7 +88,7 @@ String _homeForRole(String? role) {
     case 'student': return '/student';
     case 'faculty': return '/faculty';
     case 'industry_partner': return '/industry';
-    case 'admin': return '/citizen'; // Admin uses citizen home for now
+    case 'admin': return '/dashboard';
     default: return '/citizen';
   }
 }

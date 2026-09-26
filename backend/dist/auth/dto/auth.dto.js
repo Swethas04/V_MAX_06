@@ -37,7 +37,8 @@ __decorate([
     __metadata("design:type", String)
 ], VerifyOtpDto.prototype, "otp", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Ramesh Kumar', description: 'Full name (only for new users)' }),
+    (0, swagger_1.ApiProperty)({ example: 'Ramesh Kumar', description: 'Full name (only for new users)', required: false }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(2, 120),
     __metadata("design:type", String)

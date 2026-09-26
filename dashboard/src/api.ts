@@ -437,3 +437,57 @@ export async function supportProblemApi(problemId: string, formData: FormData) {
     throw new Error(err.response?.data?.message || err.message || 'Support failed');
   }
 }
+
+// ─── Authentication API (OTP & JWT) ───
+export interface UserProfile {
+  id: string;
+  name: string;
+  phone: string;
+  role: string;
+  organizationName?: string;
+  orgAffiliation?: string;
+}
+
+export async function sendOtpApi(phone: string): Promise<{ message: string }> {
+  try {
+    const res = await api.post('/auth/send-otp', { phone });
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response?.data?.message || 'Failed to send OTP');
+  }
+}
+
+export async function verifyOtpApi(phone: string, otp: string): Promise<{
+  accessToken: string;
+  isNewUser: boolean;
+  user: UserProfile;
+}> {
+  try {
+    const res = await api.post('/auth/verify-otp', { phone, otp });
+    const data = res.data;
+    if (data.accessToken) {
+      localStorage.setItem('auth_token', data.accessToken);
+      localStorage.setItem('auth_user', JSON.stringify(data.user));
+      api.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`;
+    }
+    return data;
+  } catch (err: any) {
+    throw new Error(err.response?.data?.message || 'Invalid verification code');
+  }
+}
+
+export function getStoredUser(): UserProfile | null {
+  try {
+    const raw = localStorage.getItem('auth_user');
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function logoutUser(): void {
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('auth_user');
+  delete api.defaults.headers.common['Authorization'];
+}
+

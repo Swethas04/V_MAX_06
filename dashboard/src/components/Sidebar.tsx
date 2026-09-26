@@ -58,7 +58,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
         </div>
         <div>
           <h1 style={{ fontSize: '16px', fontWeight: 800, letterSpacing: '-0.2px', color: '#ffffff' }}>
-            समाधान सेतु
+            SANKALP • संकल्प
           </h1>
           <p style={{ fontSize: '11px', color: '#88a690', fontWeight: 500 }}>
             Govt of Jharkhand • SIH 26043

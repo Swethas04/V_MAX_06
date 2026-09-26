@@ -5,7 +5,6 @@ export declare class AuthController {
     constructor(authService: AuthService);
     sendOtp(dto: SendOtpDto): Promise<{
         message: string;
-        mockOtp?: string;
     }>;
     verifyOtp(dto: VerifyOtpDto): Promise<{
         accessToken: string;

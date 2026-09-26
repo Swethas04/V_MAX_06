@@ -15,9 +15,9 @@ class AppLocalizations {
 
   static final Map<String, Map<String, String>> _localizedValues = {
     'en': {
-      'appName': 'Samadhan Setu',
+      'appName': 'SANKALP',
       'tagline': 'Bridging Citizen Problems to Academic & Industry Solutions',
-      'loginTitle': 'Welcome to Samadhan Setu',
+      'loginTitle': 'Welcome to SANKALP',
       'loginSubtitle': 'Enter your mobile number to get started',
       'phoneHint': '10-digit mobile number',
       'sendOtp': 'Get OTP',
@@ -58,9 +58,9 @@ class AppLocalizations {
       'statusResolved': 'Resolved & Impactful',
     },
     'hi': {
-      'appName': 'समाधान सेतु',
-      'tagline': 'नागरिक समस्याओं का शैक्षणिक एवं औद्योगिक समाधान सेतु',
-      'loginTitle': 'समाधान सेतु में आपका स्वागत है',
+      'appName': 'संकल्प (SANKALP)',
+      'tagline': 'नागरिक समस्याओं का शैक्षणिक एवं औद्योगिक संकल्प मंच',
+      'loginTitle': 'संकल्प (SANKALP) में आपका स्वागत है',
       'loginSubtitle': 'शुरू करने के लिए अपना मोबाइल नंबर दर्ज करें',
       'phoneHint': '10 अंकों का मोबाइल नंबर',
       'sendOtp': 'ओटीपी प्राप्त करें',

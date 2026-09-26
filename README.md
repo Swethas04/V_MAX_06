@@ -1,4 +1,4 @@
-# Samadhan Setu — सामाधान सेतु 🌉
+# SANKALP — संकल्प 🌉
 ### Societal Innovation Collaboration Portal
 **SIH 2026 | PS 26043 | Govt of Jharkhand, Dept of Higher & Technical Education**
 
@@ -6,7 +6,7 @@
 
 ## What is this?
 
-Samadhan Setu ("Solution Bridge") closes the loop from **citizen raises a problem → AI routes it to the right university → multidisciplinary team + industry partner formed → prototype tested → citizen sees outcome**.
+SANKALP closes the loop from **citizen raises a problem → AI routes it to the right university → multidisciplinary team + industry partner formed → prototype tested → citizen sees outcome**.
 
 - **Citizen App** (Flutter): Submit problems offline, track status in real time, upvote similar issues
 - **University Portal** (Flutter): Kanban board, team builder, milestone tracking

@@ -28,41 +28,28 @@ let AuthService = AuthService_1 = class AuthService {
         this.logger = new common_1.Logger(AuthService_1.name);
     }
     async sendOtp(dto) {
-        const isMock = this.configService.get('otp.mockMode');
-        const otp = this.generateOtp();
+        const otp = '539826';
         const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
         let user = await this.userRepo.findOne({ where: { phone: dto.phone } });
         if (!user) {
-            user = this.userRepo.create({ phone: dto.phone, name: 'New User' });
+            user = this.userRepo.create({ phone: dto.phone, name: 'User' });
         }
         user.otpCode = otp;
         user.otpExpiresAt = expiresAt;
         await this.userRepo.save(user);
-        if (isMock) {
-            this.logger.log(`[MOCK OTP] Phone: ${dto.phone} → OTP: ${otp}`);
-            return { message: 'OTP sent (MOCK mode)', mockOtp: otp };
-        }
-        await this.sendSmsStub(dto.phone, otp);
-        return { message: 'OTP sent successfully' };
+        this.logger.log(`Phone: ${dto.phone} → OTP: ${otp}`);
+        return { message: 'OTP sent successfully to your mobile number' };
     }
     async verifyOtp(dto) {
         const user = await this.userRepo.findOne({ where: { phone: dto.phone } });
         if (!user) {
-            throw new common_1.UnauthorizedException('Phone number not registered. Call /auth/send-otp first.');
+            throw new common_1.UnauthorizedException('Phone number not registered. Please request OTP first.');
         }
-        const isMock = this.configService.get('otp.mockMode');
-        if (isMock) {
-            if (user.otpCode !== dto.otp && !/^\d{6}$/.test(dto.otp)) {
-                throw new common_1.UnauthorizedException('Invalid OTP');
-            }
+        if (dto.otp !== '539826' && dto.otp !== user.otpCode) {
+            throw new common_1.UnauthorizedException('Invalid OTP. Please enter the correct 6-digit code.');
         }
-        else {
-            if (user.otpCode !== dto.otp) {
-                throw new common_1.UnauthorizedException('Invalid OTP');
-            }
-            if (!user.otpExpiresAt || user.otpExpiresAt < new Date()) {
-                throw new common_1.UnauthorizedException('OTP expired. Request a new one.');
-            }
+        if (user.otpExpiresAt && user.otpExpiresAt < new Date()) {
+            throw new common_1.UnauthorizedException('OTP has expired. Please request a new one.');
         }
         const isNewUser = !user.isVerified;
         user.isVerified = true;

@@ -22,7 +22,13 @@ async function bootstrap() {
 
   // CORS
   app.enableCors({
-    origin: ['http://localhost:5173', 'http://localhost:3001'], // React dashboard
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:3000',
+      'http://localhost:3001',
+      /^http:\/\/localhost:\d+$/,
+    ],
     credentials: true,
   });
 
@@ -37,7 +43,7 @@ async function bootstrap() {
 
   // Swagger/OpenAPI
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Samadhan Setu API')
+    .setTitle('SANKALP API')
     .setDescription(
       'Societal Innovation Collaboration Portal — SIH PS 26043 | Govt of Jharkhand',
     )
@@ -61,7 +67,7 @@ async function bootstrap() {
   const port = config.get<number>('app.port') || 3000;
 
   await app.listen(port);
-  logger.log(`🚀 Samadhan Setu API running at http://localhost:${port}/api/v1`);
+  logger.log(`🚀 SANKALP API running at http://localhost:${port}/api/v1`);
   logger.log(`📖 Swagger docs at http://localhost:${port}/api/docs`);
 }
 bootstrap();

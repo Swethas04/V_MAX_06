@@ -148,14 +148,6 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
     }
   }
 
-  void _fillMockOtp() {
-    const code = '123456';
-    for (int i = 0; i < 6; i++) {
-      _controllers[i].text = code[i];
-    }
-    _handleVerify();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -321,30 +313,6 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
                             color: Colors.white,
                           ),
                         ),
-                ),
-              ),
-              const SizedBox(height: 28),
-
-              // Mock quick auto-fill helper
-              Center(
-                child: OutlinedButton.icon(
-                  onPressed: _fillMockOtp,
-                  icon: const Icon(Icons.bolt, size: 18, color: AppTheme.secondary),
-                  label: Text(
-                    'Auto-fill Mock OTP (123456)',
-                    style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.secondary,
-                    ),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppTheme.secondary, width: 1.2),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                  ),
                 ),
               ),
             ],

@@ -49,7 +49,7 @@ exports.AppModule = AppModule = __decorate([
                     password: config.get('db.password'),
                     database: config.get('db.database'),
                     entities: [user_entity_1.User, problem_entity_1.Problem, institution_entity_1.Institution, project_team_entity_1.ProjectTeam, milestone_entity_1.Milestone, notification_entity_1.Notification],
-                    synchronize: config.get('app.nodeEnv') !== 'production',
+                    synchronize: config.get('app.nodeEnv') === 'development',
                     logging: config.get('app.nodeEnv') === 'development',
                 }),
             }),

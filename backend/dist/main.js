@@ -50,7 +50,13 @@ async function bootstrap() {
         transformOptions: { enableImplicitConversion: true },
     }));
     app.enableCors({
-        origin: ['http://localhost:5173', 'http://localhost:3001'],
+        origin: [
+            'http://localhost:5173',
+            'http://localhost:5174',
+            'http://localhost:3000',
+            'http://localhost:3001',
+            /^http:\/\/localhost:\d+$/,
+        ],
         credentials: true,
     });
     app.setGlobalPrefix('api/v1');
@@ -59,7 +65,7 @@ async function bootstrap() {
         fs.mkdirSync(uploadDir, { recursive: true });
     }
     const swaggerConfig = new swagger_1.DocumentBuilder()
-        .setTitle('Samadhan Setu API')
+        .setTitle('SANKALP API')
         .setDescription('Societal Innovation Collaboration Portal — SIH PS 26043 | Govt of Jharkhand')
         .setVersion('1.0')
         .addBearerAuth()
@@ -78,7 +84,7 @@ async function bootstrap() {
     const config = app.get(config_1.ConfigService);
     const port = config.get('app.port') || 3000;
     await app.listen(port);
-    logger.log(`🚀 Samadhan Setu API running at http://localhost:${port}/api/v1`);
+    logger.log(`🚀 SANKALP API running at http://localhost:${port}/api/v1`);
     logger.log(`📖 Swagger docs at http://localhost:${port}/api/docs`);
 }
 bootstrap();

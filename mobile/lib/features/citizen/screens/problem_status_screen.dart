@@ -25,7 +25,7 @@ class _ProblemStatusScreenState extends ConsumerState<ProblemStatusScreen> {
       'key': 'submitted',
       'title': 'Problem Submitted',
       'hi': 'समस्या दर्ज की गई',
-      'desc': 'Received by Samadhan Setu civic portal',
+      'desc': 'Received by SANKALP civic portal',
       'icon': Icons.description_outlined,
     },
     {

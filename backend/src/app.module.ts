@@ -51,7 +51,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
         password: config.get<string>('db.password'),
         database: config.get<string>('db.database'),
         entities: [User, Problem, Institution, ProjectTeam, Milestone, Notification],
-        synchronize: config.get<string>('app.nodeEnv') !== 'production',
+        synchronize: config.get<string>('app.nodeEnv') === 'development',
         logging: config.get<string>('app.nodeEnv') === 'development',
       }),
     }),

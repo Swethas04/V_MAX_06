@@ -17,26 +17,26 @@ void main() async {
 
   runApp(
     const ProviderScope(
-      child: SamadhanSetuApp(),
+      child: SankalpApp(),
     ),
   );
 }
 
-class SamadhanSetuApp extends ConsumerWidget {
-  const SamadhanSetuApp({super.key});
+class SankalpApp extends ConsumerWidget {
+  const SankalpApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
 
     return MaterialApp.router(
-      title: 'Samadhan Setu',
+      title: 'SANKALP',
       debugShowCheckedModeBanner: false,
 
       // Theme
       theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
-      themeMode: ThemeMode.system,
+      darkTheme: AppTheme.light(),
+      themeMode: ThemeMode.light,
 
       // i18n
       localizationsDelegates: const [

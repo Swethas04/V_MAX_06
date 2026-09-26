@@ -113,7 +113,7 @@ class _CitizenHomeScreenState extends ConsumerState<CitizenHomeScreen> {
             Row(
               children: [
                 Text(
-                  'Samadhan Setu',
+                  'SANKALP',
                   style: GoogleFonts.inter(
                     fontSize: 18,
                     fontWeight: FontWeight.w800,

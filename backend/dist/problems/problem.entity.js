@@ -70,9 +70,7 @@ __decorate([
 ], Problem.prototype, "categoryManual", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'geography',
-        spatialFeatureType: 'Point',
-        srid: 4326,
+        type: 'text',
         nullable: true,
     }),
     __metadata("design:type", Object)
@@ -103,8 +101,7 @@ __decorate([
 ], Problem.prototype, "upvotes", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'vector',
-        length: 384,
+        type: 'text',
         nullable: true,
         select: false,
         transformer: {

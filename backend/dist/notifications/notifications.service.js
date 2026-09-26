@@ -71,13 +71,13 @@ let NotificationsService = NotificationsService_1 = class NotificationsService {
             deepLink: `/problems/${problemId}`,
         });
         if (fcmToken) {
-            await this.sendPush(fcmToken, 'Samadhan Setu Update', message, {
+            await this.sendPush(fcmToken, 'SANKALP Update', message, {
                 problemId,
                 status: newStatus,
             });
         }
         else if (phone) {
-            await this.sendSms(phone, `Samadhan Setu: ${message}`);
+            await this.sendSms(phone, `SANKALP: ${message}`);
         }
     }
 };

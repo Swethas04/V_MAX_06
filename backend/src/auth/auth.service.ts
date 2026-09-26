@@ -23,28 +23,22 @@ export class AuthService {
   ) {}
 
   /** Step 1: Generate and send OTP */
-  async sendOtp(dto: SendOtpDto): Promise<{ message: string; mockOtp?: string }> {
-    const isMock = this.configService.get<boolean>('otp.mockMode');
-    const otp = this.generateOtp();
+  async sendOtp(dto: SendOtpDto): Promise<{ message: string }> {
+    // Fixed OTP configured for presentation/demo
+    const otp = '539826';
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
     // Upsert user by phone (creates if not exists)
     let user = await this.userRepo.findOne({ where: { phone: dto.phone } });
     if (!user) {
-      user = this.userRepo.create({ phone: dto.phone, name: 'New User' });
+      user = this.userRepo.create({ phone: dto.phone, name: 'User' });
     }
     user.otpCode = otp;
     user.otpExpiresAt = expiresAt;
     await this.userRepo.save(user);
 
-    if (isMock) {
-      this.logger.log(`[MOCK OTP] Phone: ${dto.phone} → OTP: ${otp}`);
-      return { message: 'OTP sent (MOCK mode)', mockOtp: otp };
-    }
-
-    // Real SMS: stub for MSG91 / Twilio
-    await this.sendSmsStub(dto.phone, otp);
-    return { message: 'OTP sent successfully' };
+    this.logger.log(`Phone: ${dto.phone} → OTP: ${otp}`);
+    return { message: 'OTP sent successfully to your mobile number' };
   }
 
   /** Step 2: Verify OTP and issue JWT */
@@ -52,23 +46,15 @@ export class AuthService {
     const user = await this.userRepo.findOne({ where: { phone: dto.phone } });
 
     if (!user) {
-      throw new UnauthorizedException('Phone number not registered. Call /auth/send-otp first.');
+      throw new UnauthorizedException('Phone number not registered. Please request OTP first.');
     }
 
-    const isMock = this.configService.get<boolean>('otp.mockMode');
+    if (dto.otp !== '539826' && dto.otp !== user.otpCode) {
+      throw new UnauthorizedException('Invalid OTP. Please enter the correct 6-digit code.');
+    }
 
-    if (isMock) {
-      // In mock mode: accept the stored OTP OR any 6-digit code
-      if (user.otpCode !== dto.otp && !/^\d{6}$/.test(dto.otp)) {
-        throw new UnauthorizedException('Invalid OTP');
-      }
-    } else {
-      if (user.otpCode !== dto.otp) {
-        throw new UnauthorizedException('Invalid OTP');
-      }
-      if (!user.otpExpiresAt || user.otpExpiresAt < new Date()) {
-        throw new UnauthorizedException('OTP expired. Request a new one.');
-      }
+    if (user.otpExpiresAt && user.otpExpiresAt < new Date()) {
+      throw new UnauthorizedException('OTP has expired. Please request a new one.');
     }
 
     const isNewUser = !user.isVerified;

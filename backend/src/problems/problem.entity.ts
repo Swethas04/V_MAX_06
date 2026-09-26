@@ -65,11 +65,9 @@ export class Problem {
   @Column({ type: 'enum', enum: ProblemCategory, nullable: true })
   categoryManual: ProblemCategory | null;
 
-  /** PostGIS geography point — stored as WKB, queried with ST_DWithin etc. */
+  /** Location point (e.g. "lat,lng" or geojson text) */
   @Column({
-    type: 'geography',
-    spatialFeatureType: 'Point',
-    srid: 4326,
+    type: 'text',
     nullable: true,
   })
   location: string | null;
@@ -100,10 +98,9 @@ export class Problem {
   @Column({ default: 0 })
   upvotes: number;
 
-  /** pgvector column for semantic deduplication (384-dim) */
+  /** 384-dim dense embedding vector stored as text/json */
   @Column({
-    type: 'vector' as any,
-    length: 384,
+    type: 'text',
     nullable: true,
     select: false,
     transformer: {

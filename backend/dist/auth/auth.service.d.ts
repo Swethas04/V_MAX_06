@@ -11,7 +11,6 @@ export declare class AuthService {
     constructor(userRepo: Repository<User>, jwtService: JwtService, configService: ConfigService);
     sendOtp(dto: SendOtpDto): Promise<{
         message: string;
-        mockOtp?: string;
     }>;
     verifyOtp(dto: VerifyOtpDto): Promise<{
         accessToken: string;

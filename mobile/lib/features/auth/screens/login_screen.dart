@@ -70,6 +70,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -146,7 +147,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 const SizedBox(height: 18),
                 Center(
                   child: Text(
-                    'समाधान सेतु',
+                    'संकल्प',
                     style: GoogleFonts.inter(
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -156,7 +157,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 Center(
                   child: Text(
-                    'Samadhan Setu',
+                    'SANKALP',
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,

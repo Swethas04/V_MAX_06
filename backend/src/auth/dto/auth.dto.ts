@@ -1,4 +1,4 @@
-import { IsString, Matches, Length } from 'class-validator';
+import { IsString, Matches, Length, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class SendOtpDto {
@@ -19,10 +19,11 @@ export class VerifyOtpDto {
   @Length(6, 6, { message: 'OTP must be exactly 6 digits' })
   otp: string;
 
-  @ApiProperty({ example: 'Ramesh Kumar', description: 'Full name (only for new users)' })
+  @ApiProperty({ example: 'Ramesh Kumar', description: 'Full name (only for new users)', required: false })
+  @IsOptional()
   @IsString()
   @Length(2, 120)
-  name: string;
+  name?: string;
 }
 
 export class SelectRoleDto {
